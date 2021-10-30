@@ -7,6 +7,7 @@ Dyandra Paramitha W. | 05111940000119 |
 Daanii Nabil Ghinannafsi Kusnanta | 05111940000163 |
 
 ## Daftar Soal
+## Daftar Isi
 * [Soal 1](#soal1)
 * [Soal 2](#soal2)
 * [Soal 3](#soal3)
@@ -24,7 +25,6 @@ Daanii Nabil Ghinannafsi Kusnanta | 05111940000163 |
 * [Soal 15](#soal15)
 * [Soal 16](#soal16)
 * [Soal 17](#soal17)
-
 * [Kendala Yang Dialami](#kendala)
 
 ## <a name="soal1"></a> Soal 1
@@ -279,4 +279,6 @@ Melakukan `lynx franky.d07.com` pada Loguetown.
 
 
 ## <a name="kendala"></a> Kendala Yang Dialami
+
+
 
