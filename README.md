@@ -436,10 +436,29 @@ Buat directory baru dengan nama `general.mecha.franky.d07.com` pada `/var/www/`.
 Kemudian, jalankan perintah `a2ensite general.mecha.franky.d07.com` dan `service apache2 restart`.
 
 ## <a name="soal15"></a> Soal 15
-dengan autentikasi username luffy dan password onepiece dan file di /var/www/general.mecha.franky.yyy
+Dengan autentikasi username luffy dan password onepiece dan file di /var/www/general.mecha.franky.yyy
 	
 ### Pembahasan
+### Pada Skypie
+Jalankan perintah `htpasswd -c /etc/apache2/.htpasswd luffy` untuk membuat file yang menyimpan username dan password ke dalam file `/etc/apache2/.htpasswd` dengan user `luffy`. Masukkan password: `onepiece`.
 	
+Kemudian, buka file `/etc/apache2/sites-available/general.mecha.franky.d07.com.conf` dan edit isinya menjadi:
+```
+	<Directory /var/www/general.mecha.franky.d07.com>
+		Options +FollowSymLinks -Multiviews
+		AllowOverride All
+	</Directory>
+```
+
+Setelah itu, buka file `/var/www/general.mecha/franky.d07.com/.htaccess` dan tambahkan isinya dengan:
+```
+	AuthType Basic
+	AuthName "Restricted Content"
+	AuthUserFile /etc/apache2/.htpasswd
+	Require valid-user
+```
+Kemudian, jalankan perintah `service apache2 restart`.
+		
 ## <a name="soal16"></a> Soal 16
 Dan setiap kali mengakses IP Skypie akan dialihkan secara otomatis ke www.franky.yyy.com
 	
