@@ -29,6 +29,7 @@ Daanii Nabil Ghinannafsi Kusnanta | 05111940000163 |
 * [Soal 16](#soal16)
 * [Soal 17](#soal17)
 * [Kendala Yang Dialami](#kendala)
+* [Referensi](#referensi)
 
 ## <a name="soal1"></a> Soal 1
 EniesLobby akan dijadikan sebagai DNS Master, Water7 akan dijadikan DNS Slave, dan Skypie akan digunakan sebagai Web Server. Terdapat 2 Client yaitu Loguetown, dan Alabasta. Semua node terhubung pada router Foosha, sehingga dapat mengakses internet
@@ -299,7 +300,7 @@ Selanjutnya, buka file ```/etc/apache2/sites-available/franky.d07.com.conf``` da
 	</Directory>
 ```
 	
-<!-- image -->
+<image src="img/9b.PNG" width="700">
 
 ### Pada Loguetown
 Lakukan testing pada client dengan menjalankan command `lynx franky.d07.com/home`. Akan muncul halaman:
@@ -326,8 +327,6 @@ Lalu, lakukan setting pada file `super.franky.d07.com.conf` dengan line berikut:
         DocumentRoot /var/www/super.franky.d07.com
 ```
 
-<!-- image 10b -->
-
 Buat directory baru dengan nama `super.franky.d07.com` pada directory `/var/www` menggunakan `mkdir /var/www/super.franky.d07.com`. Selanjutnya, copy isi folder `super.franky` yang telah didownload ke `/var/www/super.franky.d07.com`.
 ```bash
 	cp -r /root/Praktikum-Modul-2-Jarkom-main/super.franky/error /var/www/super.franky.d07.com
@@ -339,8 +338,7 @@ Jalankan command `a2ensite super.franky.d07.com` dan `service apache2 restart`.
 
 ### Pada Loguetown
 Lakukan testing pada client dengan command `lynx super.franky.d07.com`. Maka, akan muncul halaman berikut.
-
-<!-- image 10d -->
+	
 <image src="img/10b.PNG" width="700">
 	
 ## <a name="soal11"></a> Soal 11
