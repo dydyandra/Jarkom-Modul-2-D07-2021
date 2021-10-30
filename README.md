@@ -276,9 +276,27 @@ Melakukan `lynx franky.d07.com` pada Loguetown.
 
 <image src="img/8c.PNG">
 
+## <a name="soal9"></a> Soal 9
 
+## <a name="soal10"></a> Soal 10
 
+## <a name="soal11"></a> Soal 11
+
+## <a name="soal12"></a> Soal 12
+
+## <a name="soal13"></a> Soal 13
+
+## <a name="soal14"></a> Soal 14
+
+## <a name="soal15"></a> Soal 15
+
+## <a name="soal16"></a> Soal 16
+
+## <a name="soal17"></a> Soal 17
+	
 ## <a name="kendala"></a> Kendala Yang Dialami
-
+* Node selain Foosha tidak bisa terhubung ke internet
+* Penulisan syntax yang typo sehingga sulit melakukan debugging
+* 
 
 
