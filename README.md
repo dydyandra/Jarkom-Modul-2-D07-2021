@@ -33,11 +33,11 @@ EniesLobby akan dijadikan sebagai DNS Master, Water7 akan dijadikan DNS Slave, d
 ### Pembahasan:
 Sebelumnya, telah dibuat topologi sesuai dengan yang diminta, dan pada Foosha dijalankan command `iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE -s 192.195.0.0/16` agar dapat terhubung ke jaringan luar pada router `Foosha`. Adapun agar `Foosha` dapat langsung terhubung dengan jaringan saat dijalankan, command disimpan dalam `root/.bashrc` yang automatis akan jalan apabila Foosha dinyalakan. 
 
-<image src="img/1a.png">
+<image src="img/1a.PNG">
 
 Kemudian pada setiap node ditambahkan `nameserver 192.168.122.1` ke dalam file di path `/etc/resolv.conf`, dengan menambahkannya pada `root/.bashrc` juga dengan command `echo "nameserver 192.168.122.1" > etc/resolv.conf` sehingga nameserver akan otomatis ditambahkan apabila node dinyalakan. Nameserver ini ditambahkan agar setiap node terhubung dengan router `Foosha` yang kita miliki.  
 
-<image src="img/1b.png">
+<image src="img/1b.PNG">
 
 
 ## <a name="soal2"></a> Soal 2
@@ -54,7 +54,7 @@ zone "franky.d07.com" {
 };
 ```
 
-<image src="img/2a.png">
+<image src="img/2a.PNG">
 
 kemudian buat folder kaizoku di `/etc/bind` menggunakan `mkdir /etc/bind/kaizoku`. 
 
@@ -62,7 +62,7 @@ Lalu copy `/etc/bind/db.local` menjadi `/etc/bind/kaizoku/franky.d07.com` menggu
 
 Lalu konfigurasi file tersebut seperti pada gambar. 
 
-<image src="img/2b.png">
+<image src="img/2b.PNG">
 
 ## <a name="soal3"></a> Soal 3
 Setelah itu buat subdomain super.franky.yyy.com dengan alias www.super.franky.yyy.com yang diatur DNS nya di EniesLobby dan mengarah ke Skypie.
@@ -73,7 +73,7 @@ Pada file `/etc/bind/kaizoku/franky.d07.com` ditambahkan:
         ns1     IN      A       192.195.2.4 ; IP Skypie
         super   IN      NS      ns1
 ```
-<image src="img/3b.png">
+<image src="img/3b.PNG">
 
 Kemudian menambahkan pada `/etc/bind/named.conf.local`: 
 ```bash
@@ -85,12 +85,12 @@ zone "super.franky.d07.com" {
 Untuk menambah subdomain `super.franky.d07.com`.
 
 
-<image src="img/3a.png">
+<image src="img/3a.PNG">
 
 Kemudian buat file baru untuk subdomain seperti pada nomor di atas. Copy `/etc/bind/db.local` menjadi `/etc/bind/kaizoku/super.franky.d07.com` menggunakan `cp /etc/bind/db.local /etc/bind/kaizoku/super.franky.d07.com`. 
 
 Lalu konfigurasi file tersebut seperti pada gambar. 
-<image src="img/3c.png">
+<image src="img/3c.PNG">
 
 ## <a name="soal4"></a> Soal 4
 Buat juga reverse domain untuk domain utama.
@@ -107,20 +107,20 @@ zone "2.195.192.in-addr.arpa" {
 ```
 Copy file `/etc/bind/db.local` menjadi `/etc/bind/kaizoku/2.195.192.in-addr.arpa` dan melakukan konfigurasi seperti pada gambar. 
 
-<image src="img/4a.png">
+<image src="img/4a.PNG">
 
 #### Loguetown
 Pada server Loguetown, menjalankan `apt-get-update` dan `apt-get install dnsutils`. 
 
 Selain itu juga menambahkan nameserver dari node Ennieslobby dan Skypie ke dalam file `/etc/resolv.conf`
 
-<image src="img/4b.png">
+<image src="img/4b.PNG">
 
 #### Testing
 ```bash
 host -t PTR 192.195.2.4
 ```
-<image src="img/4c.png">
+<image src="img/4c.PNG">
 
 ## <a name="soal5"></a> Soal 5
 Supaya tetap bisa menghubungi Franky jika server EniesLobby rusak, maka buat Water7 sebagai DNS Slave untuk domain utama. 
@@ -140,7 +140,7 @@ zone "franky.d07.com" {
 ```
 Kemudian melakukan restart pada bind. `service bind9 restart`. 
 
-<image src="img/5a.png">
+<image src="img/5a.PNG">
 
 #### Pada Water7
 Sama seperti pada server Ennieslobby, jalankan command `apt-get update` dan `apt-get install bind9 -y` untuk menginstall bind9. 
@@ -155,7 +155,7 @@ zone "franky.d07.com" {
 ```
 Kemudian melakukan restart pada bind. `service bind9 restart`. 
 
-<image src="img/5c.png">
+<image src="img/5c.PNG">
 
 #### Pada Loguetown
 Pada Loguetown ditambahkan nameserver Water7. 
@@ -164,7 +164,7 @@ Pada Loguetown ditambahkan nameserver Water7.
 - Mematikan service bind pada Ennieslobby `service bind9 stop`. 
 - Melakukan `ping franky.d07.com`. 
 
-<image src="img/5b.png">
+<image src="img/5b.PNG">
 
 ## <a name="soal6"></a> Soal 6
 
@@ -179,16 +179,16 @@ Mengedit file `/etc/bind/kaizoku/franky.d05.com`:
         mecha   IN      NS      ns1
 ```
 
-<image src="img/6a.png">
+<image src="img/6a.PNG">
 
 
 Mengedit file `/etc/bind/named.conf.options` dengan mengcomment bagian `dnssec-validation auto;` dan menambahkan `allow-query{any;};`. 
 
-<image src="img/6b.png">
+<image src="img/6b.PNG">
 
 #### Pada Water7
 Mengedit file `/etc/bind/named.conf.options` dengan mengcomment bagian `dnssec-validation auto;` dan menambahkan `allow-query{any;};`. 
-<image src="img/6b.png">
+<image src="img/6b.PNG">
 
 Menambahkan zone pada `/etc/bind/named.conf.local` dengan menambahkan:
 
@@ -198,14 +198,14 @@ Menambahkan zone pada `/etc/bind/named.conf.local` dengan menambahkan:
             file "/etc/bind/sunnygo/mecha.franky.d07.com";
     };
 ```
-<image src="img/6c.png">
+<image src="img/6c.PNG">
 
 Buat folder sunnygo dengan `mkdir /etc/bind/sunnygo` dan melakukan `cp /etc/bind/db.local /etc/bind/sunnygo/mecha.franky.d07.com`, dan melakukan konfigurasi pada gambar. 
-<image src="img/6d.png">
+<image src="img/6d.PNG">
 
 #### Testing
 Melakukan `ping mecha.franky.d07.com` pada server Loguetown. 
-<image src="img/6e.png">
+<image src="img/6e.PNG">
 
 ## <a name="soal7"></a> Soal 7
 
@@ -214,7 +214,7 @@ Untuk memperlancar komunikasi Luffy dan rekannya, dibuatkan subdomain melalui Fr
 ### Pembahasan
 #### Pada Water7: 
 Mengedit file `/etc/bind/sunnygo/mecha.franky.d07.com`: 
-<image src="img/7a.png">
+<image src="img/7a.PNG">
 
 Menambahkan zone pada `/etc/bind/named.conf.local`: 
 ```bash
@@ -223,14 +223,14 @@ Menambahkan zone pada `/etc/bind/named.conf.local`:
             file "/etc/bind/sunnygo/general.mecha.franky.d07.com";
     };
 ```
-<image src="img/7b.png">
+<image src="img/7b.PNG">
 
 Melakukan `cp /etc/bind/db.local /etc/bind/sunnygo/general.mecha.franky.d07.com`, dan melakukan konfigurasi pada gambar.
-<image src="img/7c.png"> 
+<image src="img/7c.PNG"> 
 
 #### Testing
 Melakukan `ping general.mecha.franky.d07.com` pada server Loguetown. 
-<image src="img/7d.png">
+<image src="img/7d.PNG">
 
 ## <a name="soal8"></a> Soal 8
 Setelah melakukan konfigurasi server, maka dilakukan konfigurasi Webserver. Pertama dengan webserver www.franky.yyy.com. Pertama, luffy membutuhkan webserver dengan DocumentRoot pada /var/www/franky.yyy.com.
@@ -261,7 +261,7 @@ wget https://github.com/FeinardSlim/Praktikum-Modul-2-Jarkom/archive/refs/heads/
 Kemudian pindah ke directory `/etc/apache2/sites-available` (`cd /etc/apache2/sites-available`) dan melakukan copy file `cp 000-default.conf franky.d07.com.conf`. 
 
 Lalu setting file `franky.d07.com.conf` seperti pada gambar:
-<image src="img/8b.png">
+<image src="img/8b.PNG">
 
 Kemudian membuat directory baru dengan nama `franky.d07.com` pada `/var/www/` (`mkdir /var/www/franky.d07.com`). lalu copy isi dari folder `franky` yang telah didownload ke `/var/www/franky.d07.com`. 
 ```bash
@@ -274,7 +274,7 @@ Setelah itu jalankan command `a2ensite franky.d07.com` dan `service apache2 rest
 #### Testing
 Melakukan `lynx franky.d07.com` pada Loguetown. 
 
-<image src="img/8c.png">
+<image src="img/8c.PNG">
 
 
 
