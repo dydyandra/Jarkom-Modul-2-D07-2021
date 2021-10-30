@@ -347,11 +347,37 @@ Lakukan testing pada client dengan command `lynx super.franky.d07.com`. Maka, ak
 Akan tetapi, pada folder /public, Luffy ingin hanya dapat melakukan directory listing saja.
 	
 ### Pembahasan
+Pindah ke directory `/etc/apache2/sites-available` kemudian buka file `super.franky.d07.com.conf` dan tambahkan:
+```
+	<Directory /var/www/super.franky.d07.com/public>
+	    Options +Indexes
+	</Directory>
+```
+
+<!-- image 11a -->
+
+Jalankan command `service apache2 restart`.
+
+### Pada Loguetown
+Lakukan testing pada client dengan menjalankan command `lynx super.franky.d07.com/public`. Maka, akan muncul halaman sebagai berikut:
+
+<!-- image 11b -->
 	
 ## <a name="soal12"></a> Soal 12
 Tidak hanya itu, Luffy juga menyiapkan error file 404.html pada folder /error untuk mengganti error kode pada apache
 	
 ### Pembahasan
+Pindah ke directory `/etc/apache2/sites-available` kemudian buka file `vi super.franky.d07.com.conf` dan tambahkan:
+```
+	ErrorDocument 404 /error/404.html
+```
+
+<!-- image 12a -->
+
+### Pada Loguetown
+Lakukan testing pada client dengan menjalankan command `lynx super.franky.d07.com/halo` (lokasi yang tidak ada). Maka akan muncul halaman berikut:
+
+<!-- image 12b -->
 	
 ## <a name="soal13"></a> Soal 13
 Luffy juga meminta Nami untuk dibuatkan konfigurasi virtual host. Virtual host ini bertujuan untuk dapat mengakses file asset www.super.franky.yyy.com/public/js menjadi www.super.franky.yyy.com/js. 
