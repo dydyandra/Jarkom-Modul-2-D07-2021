@@ -389,6 +389,9 @@ Buka file `super.franky.d07.com.conf` kemudian tambahkan isinya dengan
 	Alias "/js" "/var/www/super.franky.d07.com/public/js"
 ```
 
+### Pada Loguetown
+Lakukan testing pada client dengan menjalankan command `lynx www.super.franky.D07.com/js`.
+	
 <!-- image 13 -->
 	
 ## <a name="soal14"></a> Soal 14
