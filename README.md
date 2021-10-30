@@ -394,6 +394,46 @@ Buka file `super.franky.d07.com.conf` kemudian tambahkan isinya dengan
 Dan Luffy meminta untuk web www.general.mecha.franky.yyy.com hanya bisa diakses dengan port 15000 dan port 15500
 	
 ### Pembahasan
+### Pada Skypie
+Pindah ke `/etc/apache2/sites-available` lalu copy file `000-default.conf` menjadi file `general.mecha.franky.d07.com.conf`.
+```
+	cp 000-default.conf general.mecha.franky.d07.com.conf
+	vi general.mecha.franky.d07.com
+```
+
+Setelah itu, buka file tersebut dan tambahkan isinya sebagai berikut.
+```
+	<VirtualHost *:15000 *:15500>
+        # The ServerName directive sets the request scheme, hostname and port thh
+at
+        # the server uses to identify itself. This is used when creating
+        # redirection URLs. In the context of virtual hosts, the ServerName
+        # specifies what hostname must appear in the request's Host: header to
+        # match this virtual host. For the default virtual host (this file) this
+        # value is not decisive as it is used as a last resort host regardless.
+        # However, you must set it for any further virtual host explicitly.
+        #ServerName www.example.com
+
+        ServerAdmin webmaster@localhost
+        #DocumentRoot /var/www/html
+        ServerName general.mecha.franky.d07.com
+        ServerAlias www.general.mecha.franky.d07.com
+        DocumentRoot /var/www/general.mecha.franky.d07.com
+```
+
+Kemudian, buka `etc/apache2/ports.conf` dan tambahkan
+```
+	Listen 15000
+	Listen 15500
+```
+
+Buat directory baru dengan nama `general.mecha.franky.d07.com` pada `/var/www/`. Setelah itu, copy isi dari folder `general.mecha.franky` yang telah didownload ke `/var/www/general.mecha.franky.d07.com`.
+```
+	mkdir /var/www/general.mecha.franky.d07.com
+	cp /root/Praktikum-Modul-2-Jarkom-main/general.mecha.franky/* /var/www/general.mecha.franky.d07.com
+```
+
+Kemudian, jalankan perintah `a2ensite general.mecha.franky.d07.com` dan `service apache2 restart`.
 
 ## <a name="soal15"></a> Soal 15
 dengan autentikasi username luffy dan password onepiece dan file di /var/www/general.mecha.franky.yyy
