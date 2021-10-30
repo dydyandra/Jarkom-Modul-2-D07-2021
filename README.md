@@ -6,7 +6,10 @@ Amanda Rozi Kurnia | 05111940000094 |
 Dyandra Paramitha W. | 05111940000119 |
 Daanii Nabil Ghinannafsi Kusnanta | 05111940000163 |
 
-## Daftar Soal
+## Notes
+[Soal Shift 2](https://docs.google.com/document/d/11_xDG1yHMIOAZVPksRV0VDwx8S4KIgtAMCLh3UD5-qM/edit) <br>
+**Prefix:** 192.195
+
 ## Daftar Isi
 * [Soal 1](#soal1)
 * [Soal 2](#soal2)
