@@ -458,12 +458,36 @@ Setelah itu, buka file `/var/www/general.mecha/franky.d07.com/.htaccess` dan tam
 	Require valid-user
 ```
 Kemudian, jalankan perintah `service apache2 restart`.
+
+### Pada Loguetown
+Lakukan testing pada client dengan menjalankan perintah `lynx http://192.195.2.4:15000` dan `lynx http://192.195.2.4:15500`.
 		
 ## <a name="soal16"></a> Soal 16
 Dan setiap kali mengakses IP Skypie akan dialihkan secara otomatis ke www.franky.yyy.com
 	
 ### Pembahasan
-	
+### Pada Skypie
+Pindah ke directory `/var/www/html` dan edit file `.htaccess` menjadi:
+```bash
+	RewriteEngine On
+	RewriteBase /~new/
+	RewriteCond %{HTTP_HOST} ^192\.195\.2\.4$
+	RewriteRule ^(.*)$ franky.d07.com [L,R=301]
+```
+
+Lalu, buka file `/etc/apache2/sites-available/000-default.conf` dan edit isinya menjadi:
+```bash
+	<Directory /var/www/html>
+		Options +FollowSymLinks -Multiviews
+		AllowOverride All
+	</Directory>
+```
+
+Kemudian, jalankan perintah `service apache2 restart`.
+
+### Pada Loguetown
+Lakukan testing pada client dengan menjalankan perintah `lynx http://192.195.2.4`.
+
 ## <a name="soal17"></a> Soal 17
 Dikarenakan Franky juga ingin mengajak temannya untuk dapat menghubunginya melalui website www.super.franky.yyy.com, dan dikarenakan pengunjung web server pasti akan bingung dengan randomnya images yang ada, maka Franky juga meminta untuk mengganti request gambar yang memiliki substring “franky” akan diarahkan menuju franky.png.
 	
@@ -472,6 +496,6 @@ Dikarenakan Franky juga ingin mengajak temannya untuk dapat menghubunginya melal
 ## <a name="kendala"></a> Kendala Yang Dialami
 * Node selain Foosha tidak bisa terhubung ke internet
 * Penulisan syntax yang typo sehingga sulit melakukan debugging
-* 
+
 
 
