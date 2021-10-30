@@ -383,6 +383,12 @@ Lakukan testing pada client dengan menjalankan command `lynx super.franky.d07.co
 Luffy juga meminta Nami untuk dibuatkan konfigurasi virtual host. Virtual host ini bertujuan untuk dapat mengakses file asset www.super.franky.yyy.com/public/js menjadi www.super.franky.yyy.com/js. 
 
 ### Pembahasan
+Buka file `super.franky.d07.com.conf` kemudian tambahkan isinya dengan
+```
+	Alias "/js" "/var/www/super.franky.d07.com/public/js"
+```
+
+<!-- image 13 -->
 	
 ## <a name="soal14"></a> Soal 14
 Dan Luffy meminta untuk web www.general.mecha.franky.yyy.com hanya bisa diakses dengan port 15000 dan port 15500
