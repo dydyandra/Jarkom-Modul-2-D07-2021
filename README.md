@@ -378,6 +378,7 @@ Pindah ke directory `/etc/apache2/sites-available` kemudian buka file `vi super.
 Lakukan testing pada client dengan menjalankan command `lynx super.franky.d07.com/halo` (lokasi yang tidak ada). Maka akan muncul halaman berikut:
 
 <!-- image 12b -->
+<image src="img/12b.PNG" width="700">
 	
 ## <a name="soal13"></a> Soal 13
 Luffy juga meminta Nami untuk dibuatkan konfigurasi virtual host. Virtual host ini bertujuan untuk dapat mengakses file asset www.super.franky.yyy.com/public/js menjadi www.super.franky.yyy.com/js. 
