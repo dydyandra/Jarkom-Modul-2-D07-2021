@@ -285,70 +285,237 @@ Setelah itu, Luffy juga membutuhkan agar url www.franky.yyy.com/index.php/home d
 ### Pembahasan
 ### Pada Skypie
 Pertama, aktifkan modul `rewrite` dengan menjalankan perintah `a2enmod rewrite`. Kemudian, restart apache2 `service apache2 restart` dan pindah ke directory `var/www/franky.d07.com`. Buat file `.htaccess` dengan isi
+```bash
+	RewriteEngine On
+	RewriteRule ^home$ index.php/home
 ```
-RewriteEngine On
-RewriteRule ^home$ index.php/home
-```
-
-<!-- image -->
+<image src="img/9a.PNG" width="700">
 	
 Selanjutnya, buka file ```/etc/apache2/sites-available/franky.d07.com.conf``` dan tambahkan
-```
-<Directory /var/www/franky.d07.com>
-	Options +FollowSymLinks -Multiviews
-	AllowOverride All
-</Directory>
+```bash
+	<Directory /var/www/franky.d07.com>
+		Options +FollowSymLinks -Multiviews
+		AllowOverride All
+	</Directory>
 ```
 	
 <!-- image -->
 
-#### Pada Loguetown
+### Pada Loguetown
 Lakukan testing pada client dengan menjalankan command `lynx franky.d07.com/home`. Akan muncul halaman:
-<!-- image -->
+<image src="img/9c.PNG" width="700">
 	
 ## <a name="soal10"></a> Soal 10
 Setelah itu, pada subdomain www.super.franky.yyy.com, Luffy membutuhkan penyimpanan aset yang memiliki DocumentRoot pada /var/www/super.franky.yyy.com
 
 ### Pembahasan
+Pindah ke directory `/etc/apache2/sites-available`, kemudian copy file `000-default.conf` menjadi file `super.franky.d07.com.conf`.
+```bash
+	cd /etc/apache2/sites-available
+	cp 000-default.conf super.franky.d07.com.conf
+```
+
+<!-- image 10a -->
+
+Lalu, lakukan setting pada file `super.franky.d07.com.conf` dengan line berikut:
+```bash
+	ServerAdmin webmaster@localhost
+        #DocumentRoot /var/www/html
+        ServerName super.franky.d07.com
+        ServerAlias www.super.franky.d07.com
+        DocumentRoot /var/www/super.franky.d07.com
+```
+
+<!-- image 10b -->
+
+Buat directory baru dengan nama `super.franky.d07.com` pada directory `/var/www` menggunakan `mkdir /var/www/super.franky.d07.com`. Selanjutnya, copy isi folder `super.franky` yang telah didownload ke `/var/www/super.franky.d07.com`.
+```bash
+	cp -r /root/Praktikum-Modul-2-Jarkom-main/super.franky/error /var/www/super.franky.d07.com
+	cp -r /root/Praktikum-Modul-2-Jarkom-main/super.franky/public /var/www/super.franky.d07.com
+```
+
+Jalankan command `a2ensite super.franky.d07.com` dan `service apache2 restart`.
+
+<!-- image 10c -->
+
+### Pada Loguetown
+Lakukan testing pada client dengan command `lynx super.franky.d07.com`. Maka, akan muncul halaman berikut.
+
+<!-- image 10d -->
 	
 ## <a name="soal11"></a> Soal 11
 Akan tetapi, pada folder /public, Luffy ingin hanya dapat melakukan directory listing saja.
 	
 ### Pembahasan
+Pindah ke directory `/etc/apache2/sites-available` kemudian buka file `super.franky.d07.com.conf` dan tambahkan:
+```bash
+	<Directory /var/www/super.franky.d07.com/public>
+	    Options +Indexes
+	</Directory>
+```
+
+<!-- image 11a -->
+
+Jalankan command `service apache2 restart`.
+
+### Pada Loguetown
+Lakukan testing pada client dengan menjalankan command `lynx super.franky.d07.com/public`. Maka, akan muncul halaman sebagai berikut:
+
+<!-- image 11b -->
 	
 ## <a name="soal12"></a> Soal 12
 Tidak hanya itu, Luffy juga menyiapkan error file 404.html pada folder /error untuk mengganti error kode pada apache
 	
 ### Pembahasan
+Pindah ke directory `/etc/apache2/sites-available` kemudian buka file `vi super.franky.d07.com.conf` dan tambahkan:
+```bash
+	ErrorDocument 404 /error/404.html
+```
+
+<!-- image 12a -->
+
+### Pada Loguetown
+Lakukan testing pada client dengan menjalankan command `lynx super.franky.d07.com/halo` (lokasi yang tidak ada). Maka akan muncul halaman berikut:
+
+<!-- image 12b -->
 	
 ## <a name="soal13"></a> Soal 13
 Luffy juga meminta Nami untuk dibuatkan konfigurasi virtual host. Virtual host ini bertujuan untuk dapat mengakses file asset www.super.franky.yyy.com/public/js menjadi www.super.franky.yyy.com/js. 
 
 ### Pembahasan
+Buka file `super.franky.d07.com.conf` kemudian tambahkan isinya dengan
+```bash
+	Alias "/js" "/var/www/super.franky.d07.com/public/js"
+```
+
+<!-- image 13 -->
 	
 ## <a name="soal14"></a> Soal 14
 Dan Luffy meminta untuk web www.general.mecha.franky.yyy.com hanya bisa diakses dengan port 15000 dan port 15500
 	
 ### Pembahasan
+### Pada Skypie
+Pindah ke `/etc/apache2/sites-available` lalu copy file `000-default.conf` menjadi file `general.mecha.franky.d07.com.conf`.
+```bash
+	cp 000-default.conf general.mecha.franky.d07.com.conf
+	vi general.mecha.franky.d07.com
+```
+
+Setelah itu, buka file tersebut dan tambahkan isinya sebagai berikut.
+```bash
+	<VirtualHost *:15000 *:15500>
+        # The ServerName directive sets the request scheme, hostname and port thh
+at
+        # the server uses to identify itself. This is used when creating
+        # redirection URLs. In the context of virtual hosts, the ServerName
+        # specifies what hostname must appear in the request's Host: header to
+        # match this virtual host. For the default virtual host (this file) this
+        # value is not decisive as it is used as a last resort host regardless.
+        # However, you must set it for any further virtual host explicitly.
+        #ServerName www.example.com
+
+        ServerAdmin webmaster@localhost
+        #DocumentRoot /var/www/html
+        ServerName general.mecha.franky.d07.com
+        ServerAlias www.general.mecha.franky.d07.com
+        DocumentRoot /var/www/general.mecha.franky.d07.com
+```
+
+Kemudian, buka `etc/apache2/ports.conf` dan tambahkan
+```bash
+	Listen 15000
+	Listen 15500
+```
+
+Buat directory baru dengan nama `general.mecha.franky.d07.com` pada `/var/www/`. Setelah itu, copy isi dari folder `general.mecha.franky` yang telah didownload ke `/var/www/general.mecha.franky.d07.com`.
+```bash
+	mkdir /var/www/general.mecha.franky.d07.com
+	cp /root/Praktikum-Modul-2-Jarkom-main/general.mecha.franky/* /var/www/general.mecha.franky.d07.com
+```
+
+Kemudian, jalankan perintah `a2ensite general.mecha.franky.d07.com` dan `service apache2 restart`.
 
 ## <a name="soal15"></a> Soal 15
-dengan autentikasi username luffy dan password onepiece dan file di /var/www/general.mecha.franky.yyy
+Dengan autentikasi username luffy dan password onepiece dan file di /var/www/general.mecha.franky.yyy
 	
 ### Pembahasan
+### Pada Skypie
+Jalankan perintah `htpasswd -c /etc/apache2/.htpasswd luffy` untuk membuat file yang menyimpan username dan password ke dalam file `/etc/apache2/.htpasswd` dengan user `luffy`. Masukkan password: `onepiece`.
 	
+Kemudian, buka file `/etc/apache2/sites-available/general.mecha.franky.d07.com.conf` dan edit isinya menjadi:
+```bash
+	<Directory /var/www/general.mecha.franky.d07.com>
+		Options +FollowSymLinks -Multiviews
+		AllowOverride All
+	</Directory>
+```
+
+Setelah itu, buka file `/var/www/general.mecha/franky.d07.com/.htaccess` dan tambahkan isinya dengan:
+```bash
+	AuthType Basic
+	AuthName "Restricted Content"
+	AuthUserFile /etc/apache2/.htpasswd
+	Require valid-user
+```
+Kemudian, jalankan perintah `service apache2 restart`.
+
+### Pada Loguetown
+Lakukan testing pada client dengan menjalankan perintah `lynx http://192.195.2.4:15000` dan `lynx http://192.195.2.4:15500`.
+		
 ## <a name="soal16"></a> Soal 16
 Dan setiap kali mengakses IP Skypie akan dialihkan secara otomatis ke www.franky.yyy.com
 	
 ### Pembahasan
-	
+### Pada Skypie
+Pindah ke directory `/var/www/html` dan edit file `.htaccess` menjadi:
+```bash
+	RewriteEngine On
+	RewriteBase /~new/
+	RewriteCond %{HTTP_HOST} ^192\.195\.2\.4$
+	RewriteRule ^(.*)$ franky.d07.com [L,R=301]
+```
+
+Lalu, buka file `/etc/apache2/sites-available/000-default.conf` dan edit isinya menjadi:
+```bash
+	<Directory /var/www/html>
+		Options +FollowSymLinks -Multiviews
+		AllowOverride All
+	</Directory>
+```
+
+Kemudian, jalankan perintah `service apache2 restart`.
+
+### Pada Loguetown
+Lakukan testing pada client dengan menjalankan perintah `lynx http://192.195.2.4`.
+
 ## <a name="soal17"></a> Soal 17
 Dikarenakan Franky juga ingin mengajak temannya untuk dapat menghubunginya melalui website www.super.franky.yyy.com, dan dikarenakan pengunjung web server pasti akan bingung dengan randomnya images yang ada, maka Franky juga meminta untuk mengganti request gambar yang memiliki substring “franky” akan diarahkan menuju franky.png.
 	
 ### Pembahasan
+### Pada Skypie
+Gunakan Rewrite module untuk redirect semua request access yang mengandung kata 'franky' ke file `/public/images/franky.png`. Buka file `/etc/apache2/sites-available/super.franky.d07.com.conf` dan tambahkan command berikut:
+```bash
+	<Directory /var/www/super.franky.d07.com>
+                Options +FollowSymLinks -Multiviews
+                AllowOverride All
+        </Directory>
+```
+
+Kemudian, buka `/var/www/super.franky.d07.com/.htaccess` dan tambahkan command berikut:
+```bash
+	RewriteEngine ON
+	RewriteRule ^(.*)franky(.*)$ http://super.franky.d07.com/public/images/franky.pnn
+	g [L,R]
+```
+
+### Pada Loguetown
+Lakukan testing pada client dengan menjalankan `lynx www.super.franky.d07.com/public/images/franky.jpg.`
 
 ## <a name="kendala"></a> Kendala Yang Dialami
 * Node selain Foosha tidak bisa terhubung ke internet
 * Penulisan syntax yang typo sehingga sulit melakukan debugging
-* 
+
+## <a name="referensi"></a> Referensi
+* https://www.bluehost.com/help/article/url-redirect-rewrite-using-the-htaccess-file
 
 
