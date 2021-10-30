@@ -203,7 +203,7 @@ Menambahkan zone pada `/etc/bind/named.conf.local` dengan menambahkan:
 ```
 <image src="img/6c.PNG" width="700">
 
-Buat folder sunnygo dengan `mkdir /etc/bind/sunnygo` dan melakukan `cp /etc/bind/db.local /etc/bind/sunnygo/mecha.franky.d07.com`, dan melakukan konfigurasi pada gambar. 
+Buat folder sunnygo dengan `mkdir /etc/bind/sunnygo` dan melakukan `cp /etc/bind/db.local /etc/bind/sunnygo/mecha.franky.d07.com`, dan melakukan konfigurasi pada gambar. <br>
 <image src="img/6d.PNG" width="700">
 
 #### Testing
