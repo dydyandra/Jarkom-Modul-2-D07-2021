@@ -286,30 +286,62 @@ Setelah itu, Luffy juga membutuhkan agar url www.franky.yyy.com/index.php/home d
 ### Pada Skypie
 Pertama, aktifkan modul `rewrite` dengan menjalankan perintah `a2enmod rewrite`. Kemudian, restart apache2 `service apache2 restart` dan pindah ke directory `var/www/franky.d07.com`. Buat file `.htaccess` dengan isi
 ```
-RewriteEngine On
-RewriteRule ^home$ index.php/home
+	RewriteEngine On
+	RewriteRule ^home$ index.php/home
 ```
-
-<!-- image -->
+<image src="img/9a.PNG" width="700">
 	
 Selanjutnya, buka file ```/etc/apache2/sites-available/franky.d07.com.conf``` dan tambahkan
 ```
-<Directory /var/www/franky.d07.com>
-	Options +FollowSymLinks -Multiviews
-	AllowOverride All
-</Directory>
+	<Directory /var/www/franky.d07.com>
+		Options +FollowSymLinks -Multiviews
+		AllowOverride All
+	</Directory>
 ```
 	
 <!-- image -->
 
-#### Pada Loguetown
+### Pada Loguetown
 Lakukan testing pada client dengan menjalankan command `lynx franky.d07.com/home`. Akan muncul halaman:
-<!-- image -->
+<image src="img/9c.PNG" width="700">
 	
 ## <a name="soal10"></a> Soal 10
 Setelah itu, pada subdomain www.super.franky.yyy.com, Luffy membutuhkan penyimpanan aset yang memiliki DocumentRoot pada /var/www/super.franky.yyy.com
 
 ### Pembahasan
+Pindah ke directory `/etc/apache2/sites-available`, kemudian copy file `000-default.conf` menjadi file `super.franky.d07.com.conf`.
+```
+	cd /etc/apache2/sites-available
+	cp 000-default.conf super.franky.d07.com.conf
+```
+
+<!-- image 10a -->
+
+Lalu, lakukan setting pada file `super.franky.d07.com.conf` dengan line berikut:
+```
+	ServerAdmin webmaster@localhost
+        #DocumentRoot /var/www/html
+        ServerName super.franky.d07.com
+        ServerAlias www.super.franky.d07.com
+        DocumentRoot /var/www/super.franky.d07.com
+```
+
+<!-- image 10b -->
+
+Buat directory baru dengan nama `super.franky.d07.com` pada directory `/var/www` menggunakan `mkdir /var/www/super.franky.d07.com`. Selanjutnya, copy isi folder `super.franky` yang telah didownload ke `/var/www/super.franky.d07.com`.
+```
+	cp -r /root/Praktikum-Modul-2-Jarkom-main/super.franky/error /var/www/super.franky.d07.com
+	cp -r /root/Praktikum-Modul-2-Jarkom-main/super.franky/public /var/www/super.franky.d07.com
+```
+
+Jalankan command `a2ensite super.franky.d07.com` dan `service apache2 restart`.
+
+<!-- image 10c -->
+
+### Pada Loguetown
+Lakukan testing pada client dengan command `lynx super.franky.d07.com`. Maka, akan muncul halaman berikut.
+
+<!-- image 10d -->
 	
 ## <a name="soal11"></a> Soal 11
 Akan tetapi, pada folder /public, Luffy ingin hanya dapat melakukan directory listing saja.
