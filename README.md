@@ -316,7 +316,7 @@ Pindah ke directory `/etc/apache2/sites-available`, kemudian copy file `000-defa
 ```
 
 <!-- image 10a -->
-
+<image src="img/10a.PNG" width="700">
 Lalu, lakukan setting pada file `super.franky.d07.com.conf` dengan line berikut:
 ```bash
 	ServerAdmin webmaster@localhost
@@ -336,12 +336,12 @@ Buat directory baru dengan nama `super.franky.d07.com` pada directory `/var/www`
 
 Jalankan command `a2ensite super.franky.d07.com` dan `service apache2 restart`.
 
-<!-- image 10c -->
 
 ### Pada Loguetown
 Lakukan testing pada client dengan command `lynx super.franky.d07.com`. Maka, akan muncul halaman berikut.
 
 <!-- image 10d -->
+<image src="img/10b.PNG" width="700">
 	
 ## <a name="soal11"></a> Soal 11
 Akan tetapi, pada folder /public, Luffy ingin hanya dapat melakukan directory listing saja.
@@ -356,13 +356,14 @@ Pindah ke directory `/etc/apache2/sites-available` kemudian buka file `super.fra
 
 <!-- image 11a -->
 
+
 Jalankan command `service apache2 restart`.
 
 ### Pada Loguetown
 Lakukan testing pada client dengan menjalankan command `lynx super.franky.d07.com/public`. Maka, akan muncul halaman sebagai berikut:
 
-<!-- image 11b -->
-	
+<image src="img/11a.PNG" width="700">
+
 ## <a name="soal12"></a> Soal 12
 Tidak hanya itu, Luffy juga menyiapkan error file 404.html pada folder /error untuk mengganti error kode pada apache
 	
@@ -393,6 +394,7 @@ Buka file `super.franky.d07.com.conf` kemudian tambahkan isinya dengan
 Lakukan testing pada client dengan menjalankan command `lynx www.super.franky.D07.com/js`.
 	
 <!-- image 13 -->
+<image src="img/13a.PNG" width="700">
 	
 ## <a name="soal14"></a> Soal 14
 Dan Luffy meminta untuk web www.general.mecha.franky.yyy.com hanya bisa diakses dengan port 15000 dan port 15500
@@ -465,6 +467,9 @@ Kemudian, jalankan perintah `service apache2 restart`.
 
 ### Pada Loguetown
 Lakukan testing pada client dengan menjalankan perintah `lynx http://192.195.2.4:15000` dan `lynx http://192.195.2.4:15500`.
+
+<image src="img/15a.PNG" width="700">
+<image src="img/15b.PNG" width="700">
 		
 ## <a name="soal16"></a> Soal 16
 Dan setiap kali mengakses IP Skypie akan dialihkan secara otomatis ke www.franky.yyy.com
@@ -486,11 +491,13 @@ Lalu, buka file `/etc/apache2/sites-available/000-default.conf` dan edit isinya 
 		AllowOverride All
 	</Directory>
 ```
-
+<image src="img/16a.PNG" width="700">
 Kemudian, jalankan perintah `service apache2 restart`.
 
 ### Pada Loguetown
 Lakukan testing pada client dengan menjalankan perintah `lynx http://192.195.2.4`.
+
+<image src="img/16b.PNG" width="700">
 
 ## <a name="soal17"></a> Soal 17
 Dikarenakan Franky juga ingin mengajak temannya untuk dapat menghubunginya melalui website www.super.franky.yyy.com, dan dikarenakan pengunjung web server pasti akan bingung dengan randomnya images yang ada, maka Franky juga meminta untuk mengganti request gambar yang memiliki substring “franky” akan diarahkan menuju franky.png.
@@ -514,10 +521,12 @@ Kemudian, buka `/var/www/super.franky.d07.com/.htaccess` dan tambahkan command b
 
 ### Pada Loguetown
 Lakukan testing pada client dengan menjalankan `lynx www.super.franky.d07.com/public/images/franky.jpg.`
+<image src="img/17a.PNG" width="700">
 
 ## <a name="kendala"></a> Kendala Yang Dialami
 * Node selain Foosha tidak bisa terhubung ke internet
 * Penulisan syntax yang typo sehingga sulit melakukan debugging
+* Solusi yang dapat dilakukan untuk penulisan syntax yaitu `named-checkconf -zj`
 
 ## <a name="referensi"></a> Referensi
 * https://www.bluehost.com/help/article/url-redirect-rewrite-using-the-htaccess-file
