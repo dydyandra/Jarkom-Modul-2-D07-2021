@@ -283,6 +283,28 @@ Melakukan `lynx franky.d07.com` pada Loguetown.
 Setelah itu, Luffy juga membutuhkan agar url www.franky.yyy.com/index.php/home dapat menjadi menjadi www.franky.yyy.com/home. 
 
 ### Pembahasan
+### Pada Skypie
+Pertama, aktifkan modul `rewrite` dengan menjalankan perintah `a2enmod rewrite`. Kemudian, restart apache2 `service apache2 restart` dan pindah ke directory `var/www/franky.d07.com`. Buat file `.htaccess` dengan isi
+```
+RewriteEngine On
+RewriteRule ^home$ index.php/home
+```
+
+<!-- image -->
+	
+Selanjutnya, buka file ```/etc/apache2/sites-available/franky.d07.com.conf``` dan tambahkan
+```
+<Directory /var/www/franky.d07.com>
+	Options +FollowSymLinks -Multiviews
+	AllowOverride All
+</Directory>
+```
+	
+<!-- image -->
+
+#### Pada Loguetown
+Lakukan testing pada client dengan menjalankan command `lynx franky.d07.com/home`. Akan muncul halaman:
+<!-- image -->
 	
 ## <a name="soal10"></a> Soal 10
 Setelah itu, pada subdomain www.super.franky.yyy.com, Luffy membutuhkan penyimpanan aset yang memiliki DocumentRoot pada /var/www/super.franky.yyy.com
