@@ -352,6 +352,18 @@ Pindah ke directory `/etc/apache2/sites-available` kemudian buka file `super.fra
 	<Directory /var/www/super.franky.d07.com/public>
 	    Options +Indexes
 	</Directory>
+
+	<Directory /var/www/super.franky.d07.com/public/css>
+	    Options -Indexes
+	</Directory>
+
+	<Directory /var/www/super.franky.d07.com/public/js>
+		Options -Indexes
+	</Directory>
+
+	<Directory /var/www/super.franky.d07.com/public/images>
+		Options -Indexes
+	</Directory>
 ```
 
 <!-- image 11a -->
