@@ -280,23 +280,50 @@ Melakukan `lynx franky.d07.com` pada Loguetown.
 <image src="img/8c.PNG" width="700">
 
 ## <a name="soal9"></a> Soal 9
+Setelah itu, Luffy juga membutuhkan agar url www.franky.yyy.com/index.php/home dapat menjadi menjadi www.franky.yyy.com/home. 
 
+### Pembahasan
+	
 ## <a name="soal10"></a> Soal 10
+Setelah itu, pada subdomain www.super.franky.yyy.com, Luffy membutuhkan penyimpanan aset yang memiliki DocumentRoot pada /var/www/super.franky.yyy.com
 
+### Pembahasan
+	
 ## <a name="soal11"></a> Soal 11
-
+Akan tetapi, pada folder /public, Luffy ingin hanya dapat melakukan directory listing saja.
+	
+### Pembahasan
+	
 ## <a name="soal12"></a> Soal 12
-
+Tidak hanya itu, Luffy juga menyiapkan error file 404.html pada folder /error untuk mengganti error kode pada apache
+	
+### Pembahasan
+	
 ## <a name="soal13"></a> Soal 13
+Luffy juga meminta Nami untuk dibuatkan konfigurasi virtual host. Virtual host ini bertujuan untuk dapat mengakses file asset www.super.franky.yyy.com/public/js menjadi www.super.franky.yyy.com/js. 
 
+### Pembahasan
+	
 ## <a name="soal14"></a> Soal 14
+Dan Luffy meminta untuk web www.general.mecha.franky.yyy.com hanya bisa diakses dengan port 15000 dan port 15500
+	
+### Pembahasan
 
 ## <a name="soal15"></a> Soal 15
-
-## <a name="soal16"></a> Soal 16
-
-## <a name="soal17"></a> Soal 17
+dengan autentikasi username luffy dan password onepiece dan file di /var/www/general.mecha.franky.yyy
 	
+### Pembahasan
+	
+## <a name="soal16"></a> Soal 16
+Dan setiap kali mengakses IP Skypie akan dialihkan secara otomatis ke www.franky.yyy.com
+	
+### Pembahasan
+	
+## <a name="soal17"></a> Soal 17
+Dikarenakan Franky juga ingin mengajak temannya untuk dapat menghubunginya melalui website www.super.franky.yyy.com, dan dikarenakan pengunjung web server pasti akan bingung dengan randomnya images yang ada, maka Franky juga meminta untuk mengganti request gambar yang memiliki substring “franky” akan diarahkan menuju franky.png.
+	
+### Pembahasan
+
 ## <a name="kendala"></a> Kendala Yang Dialami
 * Node selain Foosha tidak bisa terhubung ke internet
 * Penulisan syntax yang typo sehingga sulit melakukan debugging
