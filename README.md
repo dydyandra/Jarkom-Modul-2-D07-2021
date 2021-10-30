@@ -285,14 +285,14 @@ Setelah itu, Luffy juga membutuhkan agar url www.franky.yyy.com/index.php/home d
 ### Pembahasan
 ### Pada Skypie
 Pertama, aktifkan modul `rewrite` dengan menjalankan perintah `a2enmod rewrite`. Kemudian, restart apache2 `service apache2 restart` dan pindah ke directory `var/www/franky.d07.com`. Buat file `.htaccess` dengan isi
-```
+```bash
 	RewriteEngine On
 	RewriteRule ^home$ index.php/home
 ```
 <image src="img/9a.PNG" width="700">
 	
 Selanjutnya, buka file ```/etc/apache2/sites-available/franky.d07.com.conf``` dan tambahkan
-```
+```bash
 	<Directory /var/www/franky.d07.com>
 		Options +FollowSymLinks -Multiviews
 		AllowOverride All
@@ -310,7 +310,7 @@ Setelah itu, pada subdomain www.super.franky.yyy.com, Luffy membutuhkan penyimpa
 
 ### Pembahasan
 Pindah ke directory `/etc/apache2/sites-available`, kemudian copy file `000-default.conf` menjadi file `super.franky.d07.com.conf`.
-```
+```bash
 	cd /etc/apache2/sites-available
 	cp 000-default.conf super.franky.d07.com.conf
 ```
@@ -318,7 +318,7 @@ Pindah ke directory `/etc/apache2/sites-available`, kemudian copy file `000-defa
 <!-- image 10a -->
 
 Lalu, lakukan setting pada file `super.franky.d07.com.conf` dengan line berikut:
-```
+```bash
 	ServerAdmin webmaster@localhost
         #DocumentRoot /var/www/html
         ServerName super.franky.d07.com
@@ -329,7 +329,7 @@ Lalu, lakukan setting pada file `super.franky.d07.com.conf` dengan line berikut:
 <!-- image 10b -->
 
 Buat directory baru dengan nama `super.franky.d07.com` pada directory `/var/www` menggunakan `mkdir /var/www/super.franky.d07.com`. Selanjutnya, copy isi folder `super.franky` yang telah didownload ke `/var/www/super.franky.d07.com`.
-```
+```bash
 	cp -r /root/Praktikum-Modul-2-Jarkom-main/super.franky/error /var/www/super.franky.d07.com
 	cp -r /root/Praktikum-Modul-2-Jarkom-main/super.franky/public /var/www/super.franky.d07.com
 ```
@@ -348,7 +348,7 @@ Akan tetapi, pada folder /public, Luffy ingin hanya dapat melakukan directory li
 	
 ### Pembahasan
 Pindah ke directory `/etc/apache2/sites-available` kemudian buka file `super.franky.d07.com.conf` dan tambahkan:
-```
+```bash
 	<Directory /var/www/super.franky.d07.com/public>
 	    Options +Indexes
 	</Directory>
@@ -368,7 +368,7 @@ Tidak hanya itu, Luffy juga menyiapkan error file 404.html pada folder /error un
 	
 ### Pembahasan
 Pindah ke directory `/etc/apache2/sites-available` kemudian buka file `vi super.franky.d07.com.conf` dan tambahkan:
-```
+```bash
 	ErrorDocument 404 /error/404.html
 ```
 
@@ -384,7 +384,7 @@ Luffy juga meminta Nami untuk dibuatkan konfigurasi virtual host. Virtual host i
 
 ### Pembahasan
 Buka file `super.franky.d07.com.conf` kemudian tambahkan isinya dengan
-```
+```bash
 	Alias "/js" "/var/www/super.franky.d07.com/public/js"
 ```
 
@@ -396,13 +396,13 @@ Dan Luffy meminta untuk web www.general.mecha.franky.yyy.com hanya bisa diakses 
 ### Pembahasan
 ### Pada Skypie
 Pindah ke `/etc/apache2/sites-available` lalu copy file `000-default.conf` menjadi file `general.mecha.franky.d07.com.conf`.
-```
+```bash
 	cp 000-default.conf general.mecha.franky.d07.com.conf
 	vi general.mecha.franky.d07.com
 ```
 
 Setelah itu, buka file tersebut dan tambahkan isinya sebagai berikut.
-```
+```bash
 	<VirtualHost *:15000 *:15500>
         # The ServerName directive sets the request scheme, hostname and port thh
 at
@@ -422,13 +422,13 @@ at
 ```
 
 Kemudian, buka `etc/apache2/ports.conf` dan tambahkan
-```
+```bash
 	Listen 15000
 	Listen 15500
 ```
 
 Buat directory baru dengan nama `general.mecha.franky.d07.com` pada `/var/www/`. Setelah itu, copy isi dari folder `general.mecha.franky` yang telah didownload ke `/var/www/general.mecha.franky.d07.com`.
-```
+```bash
 	mkdir /var/www/general.mecha.franky.d07.com
 	cp /root/Praktikum-Modul-2-Jarkom-main/general.mecha.franky/* /var/www/general.mecha.franky.d07.com
 ```
@@ -443,7 +443,7 @@ Dengan autentikasi username luffy dan password onepiece dan file di /var/www/gen
 Jalankan perintah `htpasswd -c /etc/apache2/.htpasswd luffy` untuk membuat file yang menyimpan username dan password ke dalam file `/etc/apache2/.htpasswd` dengan user `luffy`. Masukkan password: `onepiece`.
 	
 Kemudian, buka file `/etc/apache2/sites-available/general.mecha.franky.d07.com.conf` dan edit isinya menjadi:
-```
+```bash
 	<Directory /var/www/general.mecha.franky.d07.com>
 		Options +FollowSymLinks -Multiviews
 		AllowOverride All
@@ -451,7 +451,7 @@ Kemudian, buka file `/etc/apache2/sites-available/general.mecha.franky.d07.com.c
 ```
 
 Setelah itu, buka file `/var/www/general.mecha/franky.d07.com/.htaccess` dan tambahkan isinya dengan:
-```
+```bash
 	AuthType Basic
 	AuthName "Restricted Content"
 	AuthUserFile /etc/apache2/.htpasswd
