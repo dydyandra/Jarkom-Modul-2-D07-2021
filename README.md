@@ -352,18 +352,6 @@ Pindah ke directory `/etc/apache2/sites-available` kemudian buka file `super.fra
 	<Directory /var/www/super.franky.d07.com/public>
 	    Options +Indexes
 	</Directory>
-
-	<Directory /var/www/super.franky.d07.com/public/css>
-	    Options -Indexes
-	</Directory>
-
-	<Directory /var/www/super.franky.d07.com/public/js>
-		Options -Indexes
-	</Directory>
-
-	<Directory /var/www/super.franky.d07.com/public/images>
-		Options -Indexes
-	</Directory>
 ```
 
 <!-- image 11a -->
@@ -505,8 +493,8 @@ Dikarenakan Franky juga ingin mengajak temannya untuk dapat menghubunginya melal
 	
 ### Pembahasan
 ### Pada Skypie
-Buka file `/etc/apache2/sites-available/super.franky.d07.com.conf` dan tambahkan command berikut:
-```
+Gunakan Rewrite module untuk redirect semua request access yang mengandung kata 'franky' ke file `/public/images/franky.png`. Buka file `/etc/apache2/sites-available/super.franky.d07.com.conf` dan tambahkan command berikut:
+```bash
 	<Directory /var/www/super.franky.d07.com>
                 Options +FollowSymLinks -Multiviews
                 AllowOverride All
@@ -514,7 +502,7 @@ Buka file `/etc/apache2/sites-available/super.franky.d07.com.conf` dan tambahkan
 ```
 
 Kemudian, buka `/var/www/super.franky.d07.com/.htaccess` dan tambahkan command berikut:
-```
+```bash
 	RewriteEngine ON
 	RewriteRule ^(.*)franky(.*)$ http://super.franky.d07.com/public/images/franky.pnn
 	g [L,R]
