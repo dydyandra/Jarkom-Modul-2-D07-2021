@@ -492,10 +492,30 @@ Lakukan testing pada client dengan menjalankan perintah `lynx http://192.195.2.4
 Dikarenakan Franky juga ingin mengajak temannya untuk dapat menghubunginya melalui website www.super.franky.yyy.com, dan dikarenakan pengunjung web server pasti akan bingung dengan randomnya images yang ada, maka Franky juga meminta untuk mengganti request gambar yang memiliki substring “franky” akan diarahkan menuju franky.png.
 	
 ### Pembahasan
+### Pada Skypie
+Buka file `/etc/apache2/sites-available/super.franky.d07.com.conf` dan tambahkan command berikut:
+```
+	<Directory /var/www/super.franky.d07.com>
+                Options +FollowSymLinks -Multiviews
+                AllowOverride All
+        </Directory>
+```
+
+Kemudian, buka `/var/www/super.franky.d07.com/.htaccess` dan tambahkan command berikut:
+```
+	RewriteEngine ON
+	RewriteRule ^(.*)franky(.*)$ http://super.franky.d07.com/public/images/franky.pnn
+	g [L,R]
+```
+
+### Pada Loguetown
+Lakukan testing pada client dengan menjalankan `lynx www.super.franky.d07.com/public/images/franky.jpg.`
 
 ## <a name="kendala"></a> Kendala Yang Dialami
 * Node selain Foosha tidak bisa terhubung ke internet
 * Penulisan syntax yang typo sehingga sulit melakukan debugging
 
+## <a name="referensi"></a> Referensi
+* https://www.bluehost.com/help/article/url-redirect-rewrite-using-the-htaccess-file
 
 
